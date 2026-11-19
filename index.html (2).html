@@ -1,0 +1,1765 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PRINCESS LAYAN 👑 – My Little Fairy Tale ✨</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Royal Fairytale English + Elegant Arabic -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@400;600;700;800&family=Cinzel+Decorative:wght@700;900&family=Great+Vibes&family=Quicksand:wght@500;600;700&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Canvas Confetti for Royal Fireworks & Celebrations -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            babyPink: '#FFE4F0',
+            pastelPink: '#FFC2DF',
+            roseGlow: '#FF85B8',
+            deepPrincess: '#D63384',
+            softLavender: '#F3E8FF',
+            lavenderAccent: '#C084FC',
+            royalGold: '#D4AF37',
+            shimmerGold: '#F6D365',
+            creamWhite: '#FFFBFD',
+          },
+          fontFamily: {
+            fairytale: ['"Cinzel Decorative"', 'serif'],
+            scriptRoyal: ['"Great Vibes"', 'cursive'],
+            cuteEn: ['"Quicksand"', 'sans-serif'],
+            arabicTitle: ['"Cairo"', '"Tajawal"', 'sans-serif'],
+            arabicBody: ['"Tajawal"', '"Amiri"', 'sans-serif'],
+            letterSerif: ['"Amiri"', '"Tajawal"', 'serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    :root {
+      --baby-pink: #ffe4f0;
+      --pastel-pink: #ffc2df;
+      --soft-lavender: #f3e8ff;
+      --royal-gold: #d4af37;
+      --shimmer-gold: #f6d365;
+      --deep-pink: #d63384;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(155deg, #fff5fa 0%, #ffe4f0 32%, #f3e8ff 68%, #fff8eb 100%);
+      color: #5c2a46;
+      font-family: 'Tajawal', sans-serif;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Ambient Disney Fairytale Glows */
+    .ambient-orb {
+      position: fixed;
+      border-radius: 9999px;
+      filter: blur(75px);
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.65;
+    }
+
+    /* Background Castle Watermark */
+    .bg-castle-backdrop {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(920px, 115vw);
+      opacity: 0.22;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Floating Butterflies, Hearts & Stars Layer */
+    .floating-layer {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .float-item {
+      position: absolute;
+      bottom: -50px;
+      animation: floatUp linear infinite;
+      opacity: 0.8;
+      user-select: none;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) translateX(0) rotate(0deg) scale(0.85);
+        opacity: 0;
+      }
+      15% {
+        opacity: 0.88;
+      }
+      50% {
+        transform: translateY(-50vh) translateX(26px) rotate(14deg) scale(1.05);
+      }
+      85% {
+        opacity: 0.82;
+      }
+      100% {
+        transform: translateY(-115vh) translateX(-20px) rotate(-12deg) scale(0.95);
+        opacity: 0;
+      }
+    }
+
+    /* Twinkling Sky Stars */
+    .twinkle-star {
+      position: absolute;
+      animation: twinkle 2.8s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { transform: scale(0.7) rotate(0deg); opacity: 0.3; }
+      50% { transform: scale(1.3) rotate(18deg); opacity: 1; }
+    }
+
+    /* Magic Wand Sparkle Trail Particles */
+    .wand-sparkle {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      user-select: none;
+      animation: wandFade 0.95s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes wandFade {
+      0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(0.5) rotate(0deg);
+      }
+      50% {
+        opacity: 0.95;
+        transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1.2) rotate(90deg);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(calc(-50% + calc(var(--dx) * 1.6)), calc(-50% + calc(var(--dy) * 1.6) + 18px)) scale(0.3) rotate(180deg);
+      }
+    }
+
+    /* Chapter Transitions */
+    .chapter-page {
+      display: none;
+      opacity: 0;
+      transform: translateY(18px) scale(0.985);
+    }
+
+    .chapter-page.active {
+      display: block;
+      animation: pageEnter 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    @keyframes pageEnter {
+      0% {
+        opacity: 0;
+        transform: translateY(22px) scale(0.98);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* Staged Hero Text Reveals */
+    .reveal-step-1 { animation: softFadeUp 0.85s ease forwards 0.1s; opacity: 0; }
+    .reveal-step-2 { animation: softFadeUp 0.85s ease forwards 0.45s; opacity: 0; }
+    .reveal-step-3 { animation: softFadeUp 0.85s ease forwards 0.85s; opacity: 0; }
+    .reveal-step-4 { animation: softFadeUp 0.85s ease forwards 1.25s; opacity: 0; }
+
+    @keyframes softFadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Royal Glassmorphic Card */
+    .princess-card {
+      background: rgba(255, 255, 255, 0.86);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border: 2px solid rgba(246, 211, 101, 0.75);
+      box-shadow: 0 22px 55px rgba(214, 51, 132, 0.14), 0 0 0 6px rgba(255, 228, 240, 0.55);
+    }
+
+    /* Ornate Gold & Rose Princess Portrait Frame */
+    .royal-frame {
+      position: relative;
+      padding: 11px;
+      border-radius: 9999px;
+      background: linear-gradient(135deg, #d4af37 0%, #f6d365 25%, #ff9ec7 50%, #f6d365 75%, #d4af37 100%);
+      box-shadow: 0 16px 38px rgba(214, 51, 132, 0.28), 0 0 28px rgba(246, 211, 101, 0.55);
+      animation: gentleFloat 4.2s ease-in-out infinite;
+    }
+
+    .royal-arch-frame {
+      position: relative;
+      padding: 10px;
+      border-radius: 165px 165px 28px 28px;
+      background: linear-gradient(135deg, #d4af37, #f6d365, #ff9ec7, #d8b4fe, #d4af37);
+      box-shadow: 0 18px 42px rgba(214, 51, 132, 0.22);
+    }
+
+    @keyframes gentleFloat {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+
+    /* Polaroid Gallery Cards */
+    .polaroid-card {
+      background: #ffffff;
+      padding: 13px 13px 20px 13px;
+      border-radius: 20px;
+      box-shadow: 0 14px 32px rgba(180, 65, 125, 0.16);
+      border: 2px solid #ffe0ee;
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease;
+      cursor: pointer;
+    }
+
+    .polaroid-card:hover {
+      transform: translateY(-10px) rotate(0deg) scale(1.04) !important;
+      box-shadow: 0 24px 48px rgba(214, 51, 132, 0.28);
+      border-color: #f6d365;
+      z-index: 10;
+    }
+
+    /* Interactive 3D Envelope */
+    .envelope-wrapper {
+      perspective: 1200px;
+      cursor: pointer;
+    }
+
+    .envelope-box {
+      position: relative;
+      width: 100%;
+      max-width: 430px;
+      height: 255px;
+      margin: 0 auto;
+      background: linear-gradient(160deg, #ff9ec7 0%, #ff6ea9 100%);
+      border-radius: 22px;
+      border: 2px solid #f6d365;
+      box-shadow: 0 22px 48px rgba(214, 51, 132, 0.3);
+      transition: transform 0.4s ease;
+    }
+
+    .envelope-box:hover {
+      transform: translateY(-4px) scale(1.015);
+    }
+
+    .envelope-flap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 138px;
+      background: linear-gradient(180deg, #ffc2df 0%, #ff85b8 100%);
+      clip-path: polygon(0 0, 50% 92%, 100% 0);
+      transform-origin: top center;
+      transition: transform 0.75s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 4;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+    }
+
+    .envelope-wrapper.opened .envelope-flap {
+      transform: rotateX(180deg);
+      z-index: 1;
+    }
+
+    .envelope-pocket {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255, 143, 191, 0.2) 0%, #f55c9c 100%);
+      clip-path: polygon(0 100%, 0 32%, 50% 68%, 100% 32%, 100% 100%);
+      border-radius: 20px;
+      z-index: 3;
+    }
+
+    .wax-seal {
+      position: absolute;
+      top: 46%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 72px;
+      height: 72px;
+      border-radius: 9999px;
+      background: radial-gradient(circle at 30% 30%, #fff099, #d4af37 70%, #9e7611 100%);
+      box-shadow: 0 8px 22px rgba(138, 92, 12, 0.48), inset 0 2px 5px rgba(255, 255, 255, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      z-index: 5;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      animation: pulseSeal 2.2s infinite;
+    }
+
+    .envelope-wrapper.opened .wax-seal {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.5);
+      pointer-events: none;
+    }
+
+    @keyframes pulseSeal {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); }
+      50% { transform: translate(-50%, -50%) scale(1.09); }
+    }
+
+    /* Parchment Letter Reveal */
+    .parchment-letter {
+      background: linear-gradient(180deg, #fffef9 0%, #fff3f8 100%);
+      border: 2.5px solid #d4af37;
+      box-shadow: 0 20px 48px rgba(180, 75, 130, 0.18), inset 0 0 35px rgba(255, 214, 232, 0.5);
+    }
+
+    .letter-paragraph {
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+
+    .letter-paragraph.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Game Animations */
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      15% { transform: scale(1.15); }
+      30% { transform: scale(1.02); }
+      45% { transform: scale(1.2); }
+      70% { transform: scale(1); }
+    }
+
+    .beating-heart {
+      animation: heartbeat 1.75s ease-in-out infinite;
+    }
+
+    @keyframes giftBounce {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      25% { transform: translateY(-7px) rotate(-3.5deg); }
+      75% { transform: translateY(-7px) rotate(3.5deg); }
+    }
+
+    .gift-bounce {
+      animation: giftBounce 2.3s ease-in-out infinite;
+    }
+
+    @keyframes balloonBob {
+      0%, 100% { transform: translateY(0px) rotate(-2deg); }
+      50% { transform: translateY(-10px) rotate(3deg); }
+    }
+
+    .balloon-bob {
+      animation: balloonBob 2.6s ease-in-out infinite;
+    }
+
+    /* Royal Button Shimmer */
+    .btn-princess {
+      background: linear-gradient(135deg, #ff6ea9 0%, #d63384 55%, #b83280 100%);
+      color: #ffffff;
+      border: 1.5px solid rgba(246, 211, 101, 0.7);
+      box-shadow: 0 10px 25px rgba(214, 51, 132, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.55);
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .btn-princess:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 16px 34px rgba(214, 51, 132, 0.45), 0 0 15px rgba(246, 211, 101, 0.4);
+    }
+
+    .btn-princess:active {
+      transform: scale(0.97);
+    }
+
+    /* Royal Certificate Ornamental Border */
+    .royal-certificate {
+      background: radial-gradient(circle at top, #fffef8 0%, #fff4fa 65%, #f8edff 100%);
+      border: 4px double #d4af37;
+      box-shadow: 0 22px 55px rgba(212, 175, 55, 0.25), inset 0 0 40px rgba(255, 228, 240, 0.65);
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #ffe4f0;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(#ff85b8, #d4af37);
+      border-radius: 999px;
+    }
+  </style>
+</head>
+<body class="selection:bg-pink-200 selection:text-pink-900">
+
+  <!-- Ambient Soft Orbs -->
+  <div class="ambient-orb w-80 h-80 bg-pink-300 top-[-60px] left-[-60px]"></div>
+  <div class="ambient-orb w-96 h-96 bg-purple-200 top-[35%] right-[-90px]"></div>
+  <div class="ambient-orb w-80 h-80 bg-amber-200 bottom-[-40px] left-[20%]"></div>
+
+  <!-- Subtle Disney Castle Silhouette Backdrop -->
+  <div class="bg-castle-backdrop" aria-hidden="true">
+    <svg viewBox="0 0 800 320" class="w-full h-auto">
+      <defs>
+        <linearGradient id="bgCastleGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#f472b6" />
+          <stop offset="100%" stop-color="#fbcfe8" />
+        </linearGradient>
+      </defs>
+      <path d="M180,320 L180,210 L165,210 L195,155 L225,210 L210,210 L210,320 Z" fill="url(#bgCastleGrad)"/>
+      <path d="M590,320 L590,210 L575,210 L605,155 L635,210 L620,210 L620,320 Z" fill="url(#bgCastleGrad)"/>
+      <path d="M260,320 L260,175 L242,175 L280,105 L318,175 L300,175 L300,320 Z" fill="url(#bgCastleGrad)"/>
+      <path d="M500,320 L500,175 L482,175 L520,105 L558,175 L540,175 L540,320 Z" fill="url(#bgCastleGrad)"/>
+      <rect x="310" y="160" width="180" height="160" fill="url(#bgCastleGrad)"/>
+      <path d="M355,160 L355,95 L335,95 L400,20 L465,95 L445,95 L445,160 Z" fill="url(#bgCastleGrad)"/>
+      <path d="M372,320 L372,250 A28,28 0 0,1 428,250 L428,320 Z" fill="#fff5fa"/>
+    </svg>
+  </div>
+
+  <!-- Floating Butterflies, Hearts & Stars Layer -->
+  <div id="floating-layer" class="floating-layer" aria-hidden="true"></div>
+
+  <!-- TOP FAIRYTALE HEADER, PROGRESS BAR & MAGIC WAND / MUSIC CONTROLS -->
+  <header class="sticky top-0 z-40 bg-white/85 backdrop-blur-md border-b-2 border-amber-200/80 shadow-sm">
+    <div class="max-w-5xl mx-auto px-3 sm:px-6 py-2.5 flex flex-wrap items-center justify-between gap-2">
+      <!-- Brand / Title -->
+      <button onclick="goToChapter(0)" class="flex items-center gap-2 text-left group focus:outline-none cursor-pointer">
+        <span class="text-2xl sm:text-3xl group-hover:scale-110 transition-transform">👑</span>
+        <div dir="ltr" class="leading-tight">
+          <div class="font-fairytale text-sm sm:text-base font-bold text-deepPrincess tracking-wide">
+            PRINCESS LAYAN
+          </div>
+          <div class="font-cuteEn text-[11px] sm:text-xs text-amber-600 font-bold">
+            My Little Fairy Tale ✨
+          </div>
+        </div>
+      </button>
+
+      <!-- Visual Storybook Progress Indicator (7 Chapters) -->
+      <nav aria-label="Storybook Progress" class="order-3 lg:order-2 w-full lg:w-auto flex items-center justify-center gap-1.5 sm:gap-2 py-1">
+        <button onclick="goToChapter(0)" data-step="0" title="Home" class="progress-node w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center text-xs sm:text-sm font-bold transition-all border-2 border-pink-300 bg-white text-pink-600 shadow-sm cursor-pointer">
+          🏰
+        </button>
+        <div class="w-2.5 sm:w-4 h-0.5 bg-amber-300/70 rounded-full"></div>
+        <button onclick="goToChapter(1)" data-step="1" title="Chapter 1" class="progress-node w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center text-xs sm:text-sm font-bold transition-all border-2 border-pink-300 bg-white text-pink-600 shadow-sm cursor-pointer">
+          1
+        </button>
+        <div class="w-2.5 sm:w-4 h-0.5 bg-amber-300/70 rounded-full"></div>
+        <button onclick="goToChapter(2)" data-step="2" title="Chapter 2" class="progress-node w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center text-xs sm:text-sm font-bold transition-all border-2 border-pink-300 bg-white text-pink-600 shadow-sm cursor-pointer">
+          2
+        </button>
+        <div class="w-2.5 sm:w-4 h-0.5 bg-amber-300/70 rounded-full"></div>
+        <button onclick="goToChapter(3)" data-step="3" title="Chapter 3" class="progress-node w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center text-xs sm:text-sm font-bold transition-all border-2 border-pink-300 bg-white text-pink-600 shadow-sm cursor-pointer">
+          3
+        </button>
+        <div class="w-2.5 sm:w-4 h-0.5 bg-amber-300/70 rounded-full"></div>
+        <button onclick="goToChapter(4)" data-step="4" title="Chapter 4" class="progress-node w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center text-xs sm:text-sm font-bold transition-all border-2 border-pink-300 bg-white text-pink-600 shadow-sm cursor-pointer">
+          💌
+        </button>
+        <div class="w-2.5 sm:w-4 h-0.5 bg-amber-300/70 rounded-full"></div>
+        <button onclick="goToChapter(5)" data-step="5" title="Magic Games" class="progress-node w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center text-xs sm:text-sm font-bold transition-all border-2 border-pink-300 bg-white text-pink-600 shadow-sm cursor-pointer">
+          🪄
+        </button>
+        <div class="w-2.5 sm:w-4 h-0.5 bg-amber-300/70 rounded-full"></div>
+        <button onclick="goToChapter(6)" data-step="6" title="Finale" class="progress-node w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center text-xs sm:text-sm font-bold transition-all border-2 border-pink-300 bg-white text-pink-600 shadow-sm cursor-pointer">
+          👑
+        </button>
+      </nav>
+
+      <!-- Magic Wand & Music Controls -->
+      <div class="order-2 lg:order-3 flex items-center gap-1.5 sm:gap-2">
+        <button
+          id="wand-toggle-btn"
+          onclick="toggleMagicWand()"
+          dir="ltr"
+          class="flex items-center gap-1 px-2.5 py-1.5 sm:px-3.5 sm:py-2 rounded-full bg-amber-100 hover:bg-amber-200 border border-amber-300 text-amber-800 font-cuteEn text-xs sm:text-sm font-bold shadow-sm transition-all cursor-pointer"
+          title="Toggle Magic Wand Sparkles"
+        >
+          <span>🪄</span>
+          <span id="wand-label">Wand On</span>
+        </button>
+
+        <button
+          id="music-toggle-btn"
+          onclick="toggleMusic()"
+          dir="ltr"
+          class="flex items-center gap-1 px-2.5 py-1.5 sm:px-3.5 sm:py-2 rounded-full bg-gradient-to-r from-pink-100 to-purple-100 hover:from-pink-200 hover:to-purple-200 border border-pink-300 text-deepPrincess font-cuteEn text-xs sm:text-sm font-bold shadow-sm transition-all cursor-pointer"
+        >
+          <span id="music-icon" class="text-base">🎵</span>
+          <span id="music-label">Music Off</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN STORYBOOK CONTAINER -->
+  <main class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 pt-6 pb-24">
+
+    <!-- ========================================================= -->
+    <!-- PAGE 0: HOME PAGE – THE MAGICAL BEGINNING                 -->
+    <!-- ========================================================= -->
+    <section id="chapter-0" class="chapter-page active">
+      <div class="princess-card rounded-[2rem] p-6 sm:p-10 text-center relative overflow-hidden">
+        <!-- Disney-Style Castle & Fireworks SVG Scene -->
+        <div class="relative mx-auto max-w-md mb-2 opacity-95 pointer-events-none" aria-hidden="true">
+          <svg viewBox="0 0 420 145" class="w-full h-auto drop-shadow-sm">
+            <defs>
+              <linearGradient id="castleGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#ff9ec7" />
+                <stop offset="100%" stop-color="#ffd6e8" />
+              </linearGradient>
+              <linearGradient id="roofGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#f6d365" />
+                <stop offset="100%" stop-color="#d4af37" />
+              </linearGradient>
+              <path id="disneyArc" d="M 65,95 A 155,85 0 0,1 355,95" fill="none" />
+            </defs>
+            <!-- Wishing Star Arc -->
+            <use href="#disneyArc" stroke="#f6d365" stroke-width="2" stroke-dasharray="5 5" opacity="0.85" />
+            <text x="348" y="92" font-size="16">🌠</text>
+
+            <!-- Soft Clouds -->
+            <path d="M35,125 Q20,125 20,112 Q20,100 34,99 Q40,86 56,88 Q70,84 78,98 Q92,100 92,113 Q92,125 76,125 Z" fill="#ffffff" opacity="0.9"/>
+            <path d="M325,125 Q310,125 310,113 Q310,102 323,101 Q329,89 344,91 Q356,88 363,100 Q376,102 376,114 Q376,125 362,125 Z" fill="#ffffff" opacity="0.9"/>
+
+            <!-- Castle Side Towers -->
+            <rect x="118" y="72" width="26" height="58" rx="3" fill="url(#castleGrad)"/>
+            <polygon points="114,72 131,42 148,72" fill="url(#roofGrad)"/>
+            <rect x="276" y="72" width="26" height="58" rx="3" fill="url(#castleGrad)"/>
+            <polygon points="272,72 289,42 306,72" fill="url(#roofGrad)"/>
+
+            <!-- Center Main Keep -->
+            <rect x="155" y="55" width="110" height="75" rx="4" fill="url(#castleGrad)"/>
+            <rect x="186" y="30" width="48" height="34" rx="3" fill="#ffb8d9"/>
+            <polygon points="180,30 210,5 240,30" fill="url(#roofGrad)"/>
+
+            <!-- Castle Gate & Glowing Windows -->
+            <path d="M195,130 L195,100 A15,15 0 0,1 225,100 L225,130 Z" fill="#fff5fa"/>
+            <circle cx="210" cy="46" r="6" fill="#fff9db"/>
+            <circle cx="172" cy="78" r="5" fill="#fff9db"/>
+            <circle cx="248" cy="78" r="5" fill="#fff9db"/>
+
+            <!-- Fireworks Sparkles -->
+            <text x="82" y="42" font-size="15" fill="#d4af37">✦</text>
+            <text x="325" y="45" font-size="15" fill="#d4af37">✦</text>
+            <text x="155" y="25" font-size="12" fill="#ff85b8">✨</text>
+            <text x="255" y="25" font-size="12" fill="#ff85b8">✨</text>
+          </svg>
+        </div>
+
+        <!-- Staged Fairytale Opening Text -->
+        <div dir="ltr" class="space-y-2 mb-6">
+          <p class="reveal-step-1 font-scriptRoyal text-3xl sm:text-4xl text-amber-600 font-bold tracking-wide">
+            ✨ Once Upon a Time...
+          </p>
+          <p class="reveal-step-2 font-cuteEn text-base sm:text-xl text-purple-700/85 font-semibold">
+            There was a little princess named...
+          </p>
+          <h1 class="reveal-step-3 font-fairytale text-4xl sm:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-deepPrincess via-pink-500 to-amber-500 drop-shadow-sm py-1">
+            LAYAN 👑
+          </h1>
+        </div>
+
+        <!-- Hero Portrait (PHOTO 1: image_06ade1.jpg) inside Ornate Rose & Gold Frame -->
+        <div class="reveal-step-4 relative mx-auto w-56 h-56 sm:w-64 sm:h-64 my-6 flex items-center justify-center">
+          <span class="absolute -top-5 left-1/2 -translate-x-1/2 text-3xl sm:text-4xl z-20 drop-shadow">👑</span>
+          <span class="absolute top-3 -left-4 text-2xl sm:text-3xl z-20 animate-bounce">🌸</span>
+          <span class="absolute top-3 -right-4 text-2xl sm:text-3xl z-20 animate-bounce" style="animation-delay: 0.4s;">🌸</span>
+          <span class="absolute bottom-2 -left-3 text-xl sm:text-2xl z-20">✨</span>
+          <span class="absolute bottom-2 -right-3 text-xl sm:text-2xl z-20">🦋</span>
+          <span class="absolute -bottom-3 left-1/2 -translate-x-1/2 text-2xl z-20">🎀</span>
+
+          <div class="royal-frame w-full h-full">
+            <img
+              src="image_06ade1.jpg"
+              alt="Princess Layan"
+              onerror="this.src='https://placehold.co/400x400/FFE4F0/D63384?text=Princess+Layan+👑'"
+              class="w-full h-full object-cover object-top rounded-full border-4 border-white shadow-inner"
+            />
+          </div>
+        </div>
+
+        <!-- Subtitle Under Photo -->
+        <p class="reveal-step-4 font-arabicBody text-xl sm:text-2xl font-bold text-deepPrincess leading-relaxed max-w-xl mx-auto mt-4 mb-8 px-2">
+          "في عالم مليء بالسحر والأحلام، توجد أميرة صغيرة تجعل كل شيء أجمل بابتسامتها..."
+        </p>
+
+        <!-- Enter Button -->
+        <div class="reveal-step-4">
+          <button
+            onclick="enterMagicalWorld()"
+            dir="ltr"
+            class="btn-princess font-cuteEn text-base sm:text-xl font-bold px-8 py-4 rounded-full inline-flex items-center gap-3 tracking-wide cursor-pointer"
+          >
+            <span>ENTER MY MAGICAL WORLD</span>
+            <span class="text-2xl animate-pulse">💗</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- PAGE 1: CHAPTER ONE – THE LITTLE PRINCESS                 -->
+    <!-- ========================================================= -->
+    <section id="chapter-1" class="chapter-page">
+      <div class="princess-card rounded-[2rem] p-6 sm:p-10">
+        <div class="text-center mb-8">
+          <span dir="ltr" class="inline-block px-4 py-1 rounded-full bg-pink-100 border border-amber-300 text-deepPrincess font-cuteEn text-xs sm:text-sm font-bold tracking-widest uppercase mb-2">
+            Chapter One ✨
+          </span>
+          <h2 dir="ltr" class="font-fairytale text-2xl sm:text-4xl font-bold text-deepPrincess">
+            A Little Princess 👑
+          </h2>
+          <div class="w-28 h-1 bg-gradient-to-r from-transparent via-amber-400 to-transparent mx-auto mt-3 rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+          <!-- Main Princess Photo (PHOTO 1: image_06ade1.jpg) -->
+          <div class="md:col-span-5 flex justify-center">
+            <div class="relative w-60 sm:w-64">
+              <span class="absolute -top-4 -right-3 text-3xl z-20">🌸</span>
+              <span class="absolute -bottom-3 -left-3 text-3xl z-20">🦋</span>
+              <div class="royal-arch-frame">
+                <img
+                  src="image_06ade1.jpg"
+                  alt="A Little Princess Layan"
+                  onerror="this.src='https://placehold.co/400x500/FFE4F0/D63384?text=Princess+Layan'"
+                  class="w-full h-72 sm:h-80 object-cover object-top rounded-t-[150px] rounded-b-[20px] border-4 border-white"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Story Text -->
+          <div class="md:col-span-7 space-y-5 text-right font-arabicBody text-lg sm:text-xl leading-loose text-[#5a2542] bg-white/75 p-6 sm:p-8 rounded-3xl border border-amber-200/90 shadow-sm">
+            <p class="font-semibold text-deepPrincess text-xl sm:text-2xl">
+              كان يا ما كان، في مملكة جميلة بعيدة، مليئة بالورود الوردية والنجوم اللامعة، عاشت أميرة صغيرة اسمها ليان.
+            </p>
+            <p>
+              كانت أميرة مختلفة عن كل الأميرات، ليس لأنها تملك تاجاً ذهبياً أو قصراً كبيراً، بل لأنها تملك ابتسامة جميلة تستطيع أن تجعل كل من حولها سعيداً.
+            </p>
+            <p>
+              كانت عيناها مليئتين بالفضول، وقلبها مليئاً بالبراءة، وكانت كل يوم تكتشف شيئاً جديداً في عالمها الصغير.
+            </p>
+            <p class="font-bold text-pink-600 pt-1">
+              وهكذا بدأت حكاية أميرتنا الجميلة... ✨👑
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- PAGE 2: CHAPTER TWO – WATCHING YOU GROW                   -->
+    <!-- ========================================================= -->
+    <section id="chapter-2" class="chapter-page">
+      <div class="princess-card rounded-[2rem] p-6 sm:p-10">
+        <div class="text-center mb-6">
+          <span dir="ltr" class="inline-block px-4 py-1 rounded-full bg-purple-100 border border-purple-200 text-purple-700 font-cuteEn text-xs sm:text-sm font-bold tracking-widest uppercase mb-2">
+            Chapter Two 🦋
+          </span>
+          <h2 dir="ltr" class="font-fairytale text-2xl sm:text-4xl font-bold text-deepPrincess">
+            Growing Up 🌸
+          </h2>
+          <div class="w-28 h-1 bg-gradient-to-r from-transparent via-pink-400 to-transparent mx-auto mt-3 rounded-full"></div>
+        </div>
+
+        <!-- Story Paragraphs -->
+        <div class="max-w-2xl mx-auto text-center space-y-4 font-arabicBody text-lg sm:text-xl leading-relaxed text-[#5a2542] bg-white/80 p-6 sm:p-7 rounded-3xl border border-pink-200 mb-10 shadow-sm">
+          <p class="font-bold text-deepPrincess text-xl">ومرت الأيام، وكبرت أميرتنا الصغيرة قليلاً قليلاً...</p>
+          <p>أصبحت تتعلم كلمات جديدة، وتلعب، وتضحك، وتكتشف أشياء جميلة كل يوم.</p>
+          <p>وها هي اليوم تذهب إلى الروضة، وتتعلم، وتلعب مع أصدقائها، وتخطو خطواتها الصغيرة نحو عالم كبير ينتظرها.</p>
+          <p class="font-semibold text-pink-600">كم هو جميل أن نراها تكبر أمام أعيننا!</p>
+          <p>كل يوم تصبح أكبر، وأجمل، وأكثر ذكاءً، وكل خطوة صغيرة تخطوها هي إنجاز كبير يستحق التصفيق. 👏🌟</p>
+        </div>
+
+        <!-- Polaroid Photo Gallery (All 4 Real Photos with Sweet Captions) -->
+        <div class="mb-4 text-center">
+          <p class="font-arabicTitle text-sm sm:text-base text-pink-600 font-semibold">
+            ✨ اضغطي على أي صورة لتكبيرها ومشاهدة الذكرى الجميلة ✨
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 px-1">
+          <!-- Polaroid 1: PHOTO 2 (Pink Hat - image_06ae18.jpg) -->
+          <div
+            onclick="openLightbox('image_06ae18.jpg', 'أميرتنا الجميلة بقبعتها الوردية 🌸')"
+            class="polaroid-card -rotate-2 relative"
+          >
+            <span class="absolute -top-3 right-3 text-2xl">🎀</span>
+            <div class="overflow-hidden rounded-xl aspect-[4/5] bg-pink-50">
+              <img
+                src="image_06ae18.jpg"
+                alt="ليان بالقبعة الوردية"
+                onerror="this.src='https://placehold.co/400x500/FFE4F0/D63384?text=Layan+Pink+Hat'"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <p class="mt-3 text-center font-arabicTitle font-bold text-deepPrincess text-sm sm:text-base">
+              أميرتنا الجميلة بقبعتها الوردية 🌸
+            </p>
+          </div>
+
+          <!-- Polaroid 2: PHOTO 4 (Blue Cap with Hands on Cheeks - image_06b1a3.jpg) -->
+          <div
+            onclick="openLightbox('image_06b1a3.jpg', 'ابتسامة تملأ الدنيا براءة وفرحاً 🦋')"
+            class="polaroid-card rotate-2 relative"
+          >
+            <span class="absolute -top-3 left-3 text-2xl">👑</span>
+            <div class="overflow-hidden rounded-xl aspect-[4/5] bg-pink-50">
+              <img
+                src="image_06b1a3.jpg"
+                alt="ليان بابتسامتها البريئة"
+                onerror="this.src='https://placehold.co/400x500/F3E8FF/D63384?text=Layan+Smile'"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <p class="mt-3 text-center font-arabicTitle font-bold text-deepPrincess text-sm sm:text-base">
+              ابتسامة تملأ الدنيا براءة وفرحاً 🦋
+            </p>
+          </div>
+
+          <!-- Polaroid 3: PHOTO 1 (Heart gesture near eye - image_06ade1.jpg) -->
+          <div
+            onclick="openLightbox('image_06ade1.jpg', 'خطوات صغيرة نحو أحلام كبيرة ✨')"
+            class="polaroid-card -rotate-1 relative"
+          >
+            <span class="absolute -top-3 right-3 text-2xl">💗</span>
+            <div class="overflow-hidden rounded-xl aspect-[4/5] bg-pink-50">
+              <img
+                src="image_06ade1.jpg"
+                alt="الأميرة ليان"
+                onerror="this.src='https://placehold.co/400x500/FFE4F0/D63384?text=Little+Princess'"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <p class="mt-3 text-center font-arabicTitle font-bold text-deepPrincess text-sm sm:text-base">
+              خطوات صغيرة نحو أحلام كبيرة ✨
+            </p>
+          </div>
+
+          <!-- Polaroid 4: PHOTO 3 (Hugging Grandfather - image_06ae21.jpg) -->
+          <div
+            onclick="openLightbox('image_06ae21.jpg', 'أدفأ حضن في مملكتنا الصغيرة 🫂❤️')"
+            class="polaroid-card rotate-1 relative"
+          >
+            <span class="absolute -top-3 left-3 text-2xl">💖</span>
+            <div class="overflow-hidden rounded-xl aspect-[4/5] bg-pink-50">
+              <img
+                src="image_06ae21.jpg"
+                alt="ليان تحتضن جدها"
+                onerror="this.src='https://placehold.co/400x500/FFE4F0/D63384?text=Family+Hug'"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <p class="mt-3 text-center font-arabicTitle font-bold text-deepPrincess text-sm sm:text-base">
+              أدفأ حضن في مملكتنا الصغيرة 🫂❤️
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- PAGE 3: CHAPTER THREE – A HEART FULL OF LOVE              -->
+    <!-- ========================================================= -->
+    <section id="chapter-3" class="chapter-page">
+      <div class="princess-card rounded-[2rem] p-6 sm:p-10 relative overflow-hidden">
+        <div class="text-center mb-8">
+          <span dir="ltr" class="inline-block px-4 py-1 rounded-full bg-rose-100 border border-rose-300 text-rose-600 font-cuteEn text-xs sm:text-sm font-bold tracking-widest uppercase mb-2">
+            Chapter Three 💞
+          </span>
+          <h2 dir="ltr" class="font-fairytale text-2xl sm:text-4xl font-bold text-deepPrincess">
+            A Special Love ❤️
+          </h2>
+          <div class="w-28 h-1 bg-gradient-to-r from-transparent via-rose-400 to-transparent mx-auto mt-3 rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+          <!-- PHOTO 3: Layan hugging her grandfather (image_06ae21.jpg) -->
+          <div class="md:col-span-5 flex flex-col items-center">
+            <div class="relative p-3 rounded-[2rem] bg-gradient-to-br from-rose-300 via-pink-200 to-amber-300 shadow-xl">
+              <span class="absolute -top-4 -left-3 text-3xl animate-bounce">❤️</span>
+              <span class="absolute -top-4 -right-3 text-3xl animate-bounce" style="animation-delay: 0.3s;">💖</span>
+              <span class="absolute -bottom-4 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-white text-rose-600 font-arabicTitle text-xs sm:text-sm font-bold shadow border border-amber-300 whitespace-nowrap">
+                دفء العائلة وحب لا ينتهي 🫂💗
+              </span>
+              <img
+                src="image_06ae21.jpg"
+                alt="ليان تحتضن جدها بحب"
+                onerror="this.src='https://placehold.co/400x500/FFE4F0/D63384?text=Family+Love'"
+                class="w-64 sm:w-72 h-80 object-cover rounded-[1.5rem] border-4 border-white"
+              />
+            </div>
+          </div>
+
+          <!-- Warm Heartfelt Text -->
+          <div class="md:col-span-7 space-y-4 font-arabicBody text-lg sm:text-xl leading-loose text-[#5a2542] bg-gradient-to-b from-white/85 to-pink-50/85 p-6 sm:p-8 rounded-3xl border border-rose-200 shadow-sm">
+            <p>لكن يا ليان، هناك سر صغير لا تعرفه أميرتنا...</p>
+            <p>هناك قلب يحبها كثيراً، ويفرح بكل ضحكة منها، ويبتسم كلما شاهدها سعيدة.</p>
+            <p class="text-2xl font-extrabold text-deepPrincess py-1">
+              إنه قلب عمتها! 💗
+            </p>
+            <p>عمتك التي تحب أن تشاهدك تكبرين، وتفرح بكل شيء جديد تتعلمينه، وتفتخر بك حتى في أبسط الأشياء.</p>
+            <p>قد لا تعرفين الآن كم أنت غالية، لكنك قطعة جميلة من القلب، ووجودك وحده يجعل الأيام أجمل.</p>
+            <p class="font-bold text-rose-600">
+              وتذكري دائماً أن هناك عمة ستبقى تشجعك، وتحبك، وتتمنى لك أجمل حياة. 🌷
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- PAGE 4: CHAPTER FOUR – A LETTER FOR YOU (ENVELOPE)        -->
+    <!-- ========================================================= -->
+    <section id="chapter-4" class="chapter-page">
+      <div class="princess-card rounded-[2rem] p-6 sm:p-10">
+        <div class="text-center mb-6">
+          <span dir="ltr" class="inline-block px-4 py-1 rounded-full bg-pink-100 border border-amber-300 text-deepPrincess font-cuteEn text-xs sm:text-sm font-bold tracking-widest uppercase mb-2">
+            Chapter Four ✨
+          </span>
+          <h2 dir="ltr" class="font-fairytale text-2xl sm:text-4xl font-bold text-deepPrincess">
+            A Letter From Meriem 💌
+          </h2>
+          <p id="envelope-hint" class="font-arabicTitle text-pink-600 font-semibold mt-2 text-base sm:text-lg animate-pulse">
+            ✨ اضغطي على الختم الذهبي لفتح رسالة عمتك ✨
+          </p>
+        </div>
+
+        <!-- Interactive Pink Envelope -->
+        <div id="envelope-container" onclick="openRoyalLetter()" class="envelope-wrapper my-6 select-none">
+          <div class="envelope-box">
+            <div class="envelope-flap"></div>
+            <div class="envelope-pocket"></div>
+            <div class="wax-seal" title="اضغطي لفتح الظرف">👑</div>
+            <div class="absolute bottom-4 inset-x-0 text-center z-4 text-white font-cuteEn font-bold tracking-wider text-sm sm:text-base drop-shadow">
+              For Princess Layan 💗
+            </div>
+          </div>
+        </div>
+
+        <!-- Revealed Fairytale Parchment Letter -->
+        <div id="letter-content-box" class="hidden max-w-2xl mx-auto mt-6">
+          <div class="parchment-letter rounded-3xl p-6 sm:p-10 relative">
+            <div class="flex justify-between items-center border-b border-amber-300/70 pb-4 mb-6">
+              <span class="text-2xl">🎀</span>
+              <span dir="ltr" class="font-fairytale text-sm sm:text-base text-amber-600 font-bold">Royal Parchment</span>
+              <span class="text-2xl">👑</span>
+            </div>
+
+            <div id="letter-paragraphs" class="space-y-4 font-letterSerif text-xl sm:text-2xl leading-relaxed text-[#521e3a]">
+              <p class="letter-paragraph font-bold text-deepPrincess text-2xl sm:text-3xl">إلى أميرتي الصغيرة ليان...</p>
+              <p class="letter-paragraph font-semibold text-pink-600">يا أجمل أميرة في عيون عمتك،</p>
+              <p class="letter-paragraph">هل تعلمين يا صغيرتي كم أحبك؟ ❤️</p>
+              <p class="letter-paragraph">أحياناً أنظر إليك وأتساءل: متى كبرتِ هكذا؟</p>
+              <p class="letter-paragraph">أشعر وكأنك كنتِ بالأمس طفلة صغيرة، واليوم أراك تكبرين أمام عيني، وتتعلمين أشياء جديدة، وتذهبين إلى الروضة، وتكتشفين العالم بابتسامتك الجميلة وعينيك البريئتين.</p>
+              <p class="letter-paragraph">أنا سعيدة جداً بكِ، وفخورة بكل خطوة صغيرة تخطينها، بكل كلمة جديدة تتعلمينها، وبكل إنجاز صغير تحققينه.</p>
+              <p class="letter-paragraph">أتمنى أن تبقي دائماً تلك الطفلة الجميلة، كثيرة الضحك، مليئة بالفرح والأحلام.</p>
+              <p class="letter-paragraph">أريدك أن تعرفي أن لكِ عمة تحبك حباً كبيراً، تفرح لفرحك، وتبتسم كلما رأتك سعيدة، وتتمنى أن تراك دائماً بخير.</p>
+              <p class="letter-paragraph">كبري يا أميرتي، وتعلمي، والعبي، واحلمي بأشياء جميلة… ولا تتوقفي أبداً عن الابتسام.</p>
+              <p class="letter-paragraph font-semibold text-deepPrincess">وإذا كبرتِ يوماً وقرأتِ هذه الكلمات، فتذكري أن عمتك كانت فخورة بكِ منذ أن كنتِ صغيرة جداً. 🥹💗</p>
+              <p class="letter-paragraph font-bold text-pink-600">أحبك يا قطعة من قلبي، يا أجمل أميرة في عالمي.</p>
+              <p class="letter-paragraph font-extrabold text-deepPrincess pt-3 text-left">من عمتك التي تحبك كثيراً. 🎀</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- PAGE 5: DISNEY MAGIC WORLD – 7 INTERACTIVE ACTIVITIES     -->
+    <!-- ========================================================= -->
+    <section id="chapter-5" class="chapter-page">
+      <div class="princess-card rounded-[2rem] p-5 sm:p-9">
+        <div class="text-center mb-8">
+          <span class="inline-block px-4 py-1 rounded-full bg-amber-100 border border-amber-300 text-amber-800 font-arabicTitle text-xs sm:text-sm font-bold mb-2">
+            7 فعاليات وألعاب من عالم ديزني للأميرة ليان 🎈🪄
+          </span>
+          <h2 dir="ltr" class="font-fairytale text-2xl sm:text-4xl font-bold text-deepPrincess">
+            ✨ LAYAN'S MAGIC WORLD ✨
+          </h2>
+          <p class="font-arabicTitle text-pink-600 text-base sm:text-lg mt-2">
+            العبـي واضغطي على الهدايا والمرآة والفراشات والبالونات يا أميرتي!
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+          <!-- ACTIVITY 1: MAGIC MIRROR 🪞 -->
+          <div class="bg-gradient-to-br from-amber-50 via-pink-50 to-white rounded-3xl p-6 border-2 border-amber-300 shadow-sm text-center flex flex-col justify-between">
+            <div>
+              <h3 dir="ltr" class="font-cuteEn text-xl font-bold text-amber-700 mb-1">1. MAGIC MIRROR 🪞</h3>
+              <p class="font-arabicTitle text-sm text-amber-800/80 mb-3">المسي مرآة الأميرة السحرية لتسأليها!</p>
+            </div>
+
+            <div class="my-2 flex flex-col items-center justify-center min-h-[210px]">
+              <button
+                id="mirror-btn"
+                onclick="activateMagicMirror()"
+                class="w-36 h-44 rounded-t-full rounded-b-3xl bg-gradient-to-b from-sky-100 via-white to-pink-100 border-[5px] border-amber-400 shadow-xl flex flex-col items-center justify-center cursor-pointer hover:scale-105 transition-transform relative"
+              >
+                <span class="absolute -top-4 text-3xl">👑</span>
+                <span class="text-5xl animate-pulse">🪞</span>
+                <span class="font-arabicTitle text-xs font-bold text-amber-800 mt-2 bg-amber-200/70 px-3 py-0.5 rounded-full">المسي المرآة</span>
+              </button>
+
+              <div id="mirror-reveal" class="hidden flex-col items-center animate-[pageEnter_0.5s_ease]">
+                <div class="relative mb-2">
+                  <span class="absolute -top-4 left-1/2 -translate-x-1/2 text-3xl z-10 animate-bounce">👑</span>
+                  <img
+                    src="image_06ade1.jpg"
+                    alt="الأميرة ليان في المرآة"
+                    onerror="this.src='https://placehold.co/300x300/FFE4F0/D63384?text=Princess+Layan'"
+                    class="w-32 h-36 object-cover object-top rounded-t-full rounded-b-2xl border-4 border-amber-400 shadow-md"
+                  />
+                </div>
+                <p class="font-arabicTitle font-bold text-deepPrincess text-sm sm:text-base bg-amber-100/90 border border-amber-300 px-3.5 py-2 rounded-2xl">
+                  "من أجمل أميرة في المملكة؟ إنها الأميرة ليان! 👑"
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- ACTIVITY 2: MAGIC BOX 🎁 -->
+          <div class="bg-gradient-to-br from-pink-50 to-white rounded-3xl p-6 border-2 border-pink-200 shadow-sm text-center flex flex-col justify-between">
+            <div>
+              <h3 dir="ltr" class="font-cuteEn text-xl font-bold text-deepPrincess mb-1">2. MAGIC BOX 🎁</h3>
+              <p class="font-arabicTitle text-sm text-pink-600 mb-3">اضغطي على علبة الهدية الملكية لفتحها!</p>
+            </div>
+
+            <div class="my-2 flex flex-col items-center justify-center min-h-[210px]">
+              <button
+                id="magic-box-btn"
+                onclick="openMagicBox()"
+                class="gift-bounce w-36 h-36 rounded-3xl bg-gradient-to-b from-pink-400 to-deepPrincess text-white shadow-xl border-4 border-amber-300 flex flex-col items-center justify-center cursor-pointer hover:scale-105 transition-transform"
+              >
+                <span class="text-6xl">🎁</span>
+                <span class="font-arabicTitle text-xs font-bold mt-1 bg-white/25 px-3 py-0.5 rounded-full">افتحيني!</span>
+              </button>
+
+              <div id="magic-box-reveal" class="hidden flex-col items-center animate-[pageEnter_0.5s_ease]">
+                <img
+                  src="image_06ae18.jpg"
+                  alt="مفاجأة ليان"
+                  onerror="this.src='https://placehold.co/300x300/FFE4F0/D63384?text=Surprise!'"
+                  class="w-36 h-36 object-cover object-top rounded-2xl border-4 border-pink-300 shadow-md mb-2"
+                />
+                <p class="font-arabicTitle font-bold text-deepPrincess text-sm sm:text-base bg-pink-100 px-4 py-2 rounded-2xl">
+                  "مفاجأة! أنتِ أجمل هدية في حياتنا." 🎀
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- ACTIVITY 3: LUCKY STAR ⭐ -->
+          <div class="bg-gradient-to-br from-purple-50 to-white rounded-3xl p-6 border-2 border-purple-200 shadow-sm text-center flex flex-col justify-between">
+            <div>
+              <h3 dir="ltr" class="font-cuteEn text-xl font-bold text-purple-700 mb-1">3. LUCKY STAR ⭐</h3>
+              <p class="font-arabicTitle text-sm text-purple-600 mb-3">المسي النجوم اللامعة لتسمعي كلاماً جميلاً لكِ!</p>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-2.5 my-3">
+              <button onclick="revealStar(0, this)" class="star-btn w-13 h-13 p-2.5 rounded-2xl bg-amber-100 hover:bg-amber-200 border-2 border-amber-300 text-3xl shadow-sm transition-transform hover:scale-110 cursor-pointer">⭐</button>
+              <button onclick="revealStar(1, this)" class="star-btn w-13 h-13 p-2.5 rounded-2xl bg-amber-100 hover:bg-amber-200 border-2 border-amber-300 text-3xl shadow-sm transition-transform hover:scale-110 cursor-pointer">🌟</button>
+              <button onclick="revealStar(2, this)" class="star-btn w-13 h-13 p-2.5 rounded-2xl bg-amber-100 hover:bg-amber-200 border-2 border-amber-300 text-3xl shadow-sm transition-transform hover:scale-110 cursor-pointer">⭐</button>
+              <button onclick="revealStar(3, this)" class="star-btn w-13 h-13 p-2.5 rounded-2xl bg-amber-100 hover:bg-amber-200 border-2 border-amber-300 text-3xl shadow-sm transition-transform hover:scale-110 cursor-pointer">🌟</button>
+              <button onclick="revealStar(4, this)" class="star-btn w-13 h-13 p-2.5 rounded-2xl bg-amber-100 hover:bg-amber-200 border-2 border-amber-300 text-3xl shadow-sm transition-transform hover:scale-110 cursor-pointer">⭐</button>
+            </div>
+
+            <div class="min-h-[56px] flex items-center justify-center bg-purple-100/75 rounded-2xl px-4 py-2.5 border border-purple-200">
+              <p id="star-message-text" class="font-arabicTitle font-bold text-purple-800 text-base sm:text-lg">
+                اضغطي على أي نجمة يا ليان ✨
+              </p>
+            </div>
+          </div>
+
+          <!-- ACTIVITY 4: PINK HEART 💗 -->
+          <div class="bg-gradient-to-br from-rose-50 to-white rounded-3xl p-6 border-2 border-rose-200 shadow-sm text-center flex flex-col justify-between">
+            <div>
+              <h3 dir="ltr" class="font-cuteEn text-xl font-bold text-rose-600 mb-1">4. PINK HEART 💗</h3>
+              <p class="font-arabicTitle text-sm text-rose-500 mb-3">اضغطي على القلب الوردي الكبير!</p>
+            </div>
+
+            <div class="my-2 flex flex-col items-center justify-center min-h-[190px]">
+              <button
+                id="pink-heart-btn"
+                onclick="openPinkHeart()"
+                class="beating-heart w-36 h-36 rounded-full bg-gradient-to-tr from-rose-500 to-pink-300 text-white shadow-xl border-4 border-white flex flex-col items-center justify-center cursor-pointer"
+              >
+                <span class="text-6xl">💗</span>
+                <span class="font-arabicTitle text-xs font-bold mt-1">اضغطي هنا</span>
+              </button>
+
+              <div id="pink-heart-reveal" class="hidden flex-col items-center animate-[pageEnter_0.5s_ease]">
+                <img
+                  src="image_06b1a3.jpg"
+                  alt="قلب يحبك"
+                  onerror="this.src='https://placehold.co/300x300/FFE4F0/D63384?text=Love+You+Layan'"
+                  class="w-36 h-36 object-cover object-top rounded-full border-4 border-rose-300 shadow-md mb-2"
+                />
+                <p class="font-arabicTitle font-bold text-rose-700 text-sm sm:text-base bg-rose-100 px-4 py-2 rounded-2xl">
+                  "هناك قلب يحبك أكثر مما تتخيلين." ❤️
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- ACTIVITY 5: CATCH THE MAGIC BUTTERFLIES 🦋 -->
+          <div class="bg-gradient-to-br from-pink-50 via-purple-50 to-white rounded-3xl p-6 border-2 border-pink-200 shadow-sm text-center flex flex-col justify-between">
+            <div class="flex items-center justify-between gap-2 mb-1">
+              <h3 dir="ltr" class="font-cuteEn text-lg sm:text-xl font-bold text-deepPrincess">5. CATCH BUTTERFLIES 🦋</h3>
+              <span class="px-3 py-0.5 rounded-full bg-amber-100 border border-amber-300 text-amber-800 font-cuteEn text-xs font-bold">
+                ⭐ <span id="butterfly-score">0</span>
+              </span>
+            </div>
+            <p class="font-arabicTitle text-sm text-pink-600 mb-2">أمسكي الفراشات السحرية وهي تطير!</p>
+
+            <div id="butterfly-garden" class="relative h-44 rounded-2xl bg-gradient-to-b from-sky-50 to-pink-100/70 border border-pink-200 overflow-hidden my-2">
+              <!-- Butterflies spawned by JS -->
+            </div>
+
+            <div class="min-h-[46px] flex items-center justify-center bg-pink-100/85 rounded-2xl px-3 py-2">
+              <p id="butterfly-msg" dir="ltr" class="font-cuteEn font-bold text-deepPrincess text-sm sm:text-base">
+                Tap the flying butterflies! 🦋✨
+              </p>
+            </div>
+          </div>
+
+          <!-- ACTIVITY 6: POP THE PINK BALLOONS 🎈 -->
+          <div class="bg-gradient-to-br from-amber-50 via-rose-50 to-white rounded-3xl p-6 border-2 border-pink-200 shadow-sm text-center flex flex-col justify-between">
+            <div class="flex items-center justify-between gap-2 mb-1">
+              <h3 dir="ltr" class="font-cuteEn text-lg sm:text-xl font-bold text-rose-600">6. PINK BALLOONS 🎈</h3>
+              <button
+                onclick="initBalloonGame()"
+                class="px-2.5 py-0.5 rounded-full bg-white border border-pink-300 text-pink-600 font-arabicTitle text-xs font-bold hover:bg-pink-100 cursor-pointer"
+              >
+                🔄 بالونات جديدة
+              </button>
+            </div>
+            <p class="font-arabicTitle text-sm text-rose-500 mb-2">فرقعي البالونات الوردية والذهبية!</p>
+
+            <div id="balloon-grid" class="grid grid-cols-3 gap-3 my-2 min-h-[150px] items-center justify-items-center bg-white/70 rounded-2xl p-3 border border-pink-100">
+              <!-- Balloons populated by JS -->
+            </div>
+
+            <div class="min-h-[46px] flex items-center justify-center bg-rose-100/80 rounded-2xl px-3 py-2">
+              <p id="balloon-msg" class="font-arabicTitle font-bold text-rose-700 text-sm sm:text-base">
+                اضغطي على أي بالون يا أميرة! 🎈✨
+              </p>
+            </div>
+          </div>
+
+          <!-- ACTIVITY 7: FIND THE CROWN 👑 (Full Width Card) -->
+          <div class="md:col-span-2 bg-gradient-to-r from-amber-50 via-pink-50 to-purple-50 rounded-3xl p-6 border-2 border-amber-300 shadow-sm text-center">
+            <div class="flex flex-wrap items-center justify-center gap-3 mb-2">
+              <h3 dir="ltr" class="font-cuteEn text-xl sm:text-2xl font-bold text-amber-700">
+                7. FIND THE ROYAL CROWN 👑
+              </h3>
+              <button
+                onclick="initCrownGame()"
+                class="px-3 py-1 rounded-full bg-white border border-amber-300 text-amber-700 font-arabicTitle text-xs font-bold hover:bg-amber-100 transition cursor-pointer"
+              >
+                🔄 إعادة اللعب
+              </button>
+            </div>
+            <p class="font-arabicTitle text-sm sm:text-base text-[#6b3452] mb-4">
+              أين يختبئ تاج الأميرة الذهبي؟ اضغطي على الورود والغيوم والنجوم لتجديه!
+            </p>
+
+            <div id="crown-grid" class="grid grid-cols-3 sm:grid-cols-6 gap-3 max-w-xl mx-auto my-3">
+              <!-- Populated dynamically by JS -->
+            </div>
+
+            <p id="crown-status" dir="ltr" class="font-cuteEn font-bold text-lg sm:text-xl text-deepPrincess mt-3 min-h-[32px]">
+              Where is the golden crown? 🔍✨
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- PAGE 6: FINAL CHAPTER & OFFICIAL PRINCESS CERTIFICATE     -->
+    <!-- ========================================================= -->
+    <section id="chapter-6" class="chapter-page">
+      <div class="princess-card rounded-[2rem] p-6 sm:p-10 text-center relative overflow-hidden">
+        <!-- Crown Header -->
+        <div class="mb-6">
+          <span class="text-5xl sm:text-6xl inline-block animate-bounce">👑</span>
+          <h2 dir="ltr" class="font-fairytale text-2xl sm:text-4xl font-bold text-deepPrincess mt-2">
+            Forever My Little Princess 💕
+          </h2>
+          <div class="w-32 h-1 bg-gradient-to-r from-transparent via-amber-400 to-transparent mx-auto mt-3 rounded-full"></div>
+        </div>
+
+        <!-- Final Story Text -->
+        <div class="max-w-2xl mx-auto space-y-5 font-arabicBody text-xl sm:text-2xl leading-loose text-[#5a2542] bg-white/80 p-6 sm:p-9 rounded-3xl border border-pink-200 shadow-sm mb-8">
+          <p class="font-bold text-deepPrincess">وهكذا تستمر حكاية أميرتنا الصغيرة...</p>
+          <p>ستكبر ليان، وستتعلم أشياء كثيرة، وستحقق أحلاماً جميلة، وستكتشف عوالم جديدة.</p>
+          <p>لكن مهما كبرت السنوات، ستبقى دائماً تلك الطفلة الصغيرة الجميلة في قلب عمتها.</p>
+          <p class="text-pink-600 font-semibold">لأن بعض الأشخاص لا يحتاجون إلى مناسبة حتى نقول لهم إننا نحبهم...</p>
+          <p class="font-extrabold text-deepPrincess text-2xl">
+            وليان واحدة من أجمل الهدايا التي منحنا إياها الله. 🤲💗
+          </p>
+        </div>
+
+        <!-- OFFICIAL ROYAL PRINCESS CERTIFICATE -->
+        <div class="royal-certificate max-w-xl mx-auto rounded-[2rem] p-6 sm:p-8 mb-8 relative">
+          <div class="flex items-center justify-between text-2xl mb-2">
+            <span>✨</span>
+            <span class="text-3xl">👑</span>
+            <span>✨</span>
+          </div>
+
+          <h3 class="font-arabicTitle text-xl sm:text-2xl font-extrabold text-amber-700 mb-1">
+            شهادة أميرة ملكية رسمية
+          </h3>
+          <p dir="ltr" class="font-fairytale text-xs sm:text-sm text-amber-600 tracking-widest uppercase mb-4">
+            Official Royal Princess Certificate
+          </p>
+
+          <div class="mx-auto w-28 h-28 sm:w-32 sm:h-32 mb-4">
+            <img
+              src="image_06ade1.jpg"
+              alt="Princess Layan Certificate"
+              onerror="this.src='https://placehold.co/300x300/FFE4F0/D63384?text=Princess+Layan'"
+              class="w-full h-full object-cover object-top rounded-full border-4 border-amber-400 shadow-md"
+            />
+          </div>
+
+          <p class="font-arabicBody text-lg sm:text-xl text-[#5a2542] leading-relaxed mb-3">
+            تشهد مملكة الأحلام والسعادة بأن الجميلة الصغيرة
+            <span class="block font-arabicTitle font-extrabold text-2xl text-deepPrincess my-1">✨ الأميرة ليان (LAYAN) ✨</span>
+            هي أجمل وأرق أميرة في عالم عمتها، وتستحق كل الحب والفرح والنجوم!
+          </p>
+
+          <div class="mt-4 pt-3 border-t border-amber-300/70 flex flex-wrap items-center justify-between gap-2 text-sm">
+            <span class="font-arabicTitle font-bold text-pink-600">توقيع عمتك المحبة: مريم 🎀</span>
+            <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-amber-100 border border-amber-400 text-amber-800 font-bold text-xs">
+              🏅 الختم الملكي المعتمد
+            </span>
+          </div>
+        </div>
+
+        <!-- Grand Finale Royal Banner -->
+        <div dir="ltr" class="max-w-xl mx-auto rounded-3xl p-6 sm:p-8 bg-gradient-to-br from-pink-100 via-white to-amber-100 border-2 border-amber-300 shadow-lg space-y-3">
+          <h3 class="font-fairytale text-2xl sm:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-deepPrincess via-pink-500 to-amber-500">
+            👑 PRINCESS LAYAN 👑
+          </h3>
+          <p class="font-cuteEn text-base sm:text-lg text-purple-700 italic font-semibold">
+            "End of this little chapter, but not the end of our love story."
+          </p>
+          <p class="font-cuteEn text-xl sm:text-2xl font-extrabold text-deepPrincess pt-1">
+            I LOVE YOU, MY LITTLE PRINCESS! 💗
+          </p>
+
+          <div class="pt-4 flex flex-wrap justify-center gap-3">
+            <button
+              onclick="launchRoyalFireworks()"
+              class="btn-princess font-cuteEn text-sm sm:text-base font-bold px-6 py-3 rounded-full cursor-pointer"
+            >
+              🎆 Celebrate with Fireworks!
+            </button>
+            <button
+              onclick="goToChapter(0)"
+              class="px-6 py-3 rounded-full bg-white hover:bg-pink-50 text-deepPrincess border-2 border-pink-300 font-cuteEn text-sm sm:text-base font-bold shadow-sm transition cursor-pointer"
+            >
+              🔄 Read Story Again
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHAPTER NAVIGATION CONTROLS (Previous / Next) -->
+    <div class="mt-8 flex items-center justify-between gap-4 max-w-2xl mx-auto">
+      <button
+        id="prev-btn"
+        onclick="prevChapter()"
+        class="px-5 py-3 rounded-full bg-white/90 hover:bg-pink-50 text-deepPrincess border-2 border-pink-300 font-arabicTitle font-bold text-sm sm:text-base shadow-sm transition disabled:opacity-40 disabled:pointer-events-none flex items-center gap-2 cursor-pointer"
+      >
+        <span>➡️</span>
+        <span>الفصل السابق</span>
+      </button>
+
+      <span id="chapter-counter" dir="ltr" class="font-cuteEn text-xs sm:text-sm font-bold text-deepPrincess bg-white/85 px-4 py-1.5 rounded-full border border-amber-300">
+        1 / 7
+      </span>
+
+      <button
+        id="next-btn"
+        onclick="nextChapter()"
+        class="btn-princess px-6 py-3 rounded-full font-arabicTitle font-bold text-sm sm:text-base flex items-center gap-2 cursor-pointer"
+      >
+        <span>الفصل التالي</span>
+        <span>⬅️</span>
+      </button>
+    </div>
+
+    <!-- SIGNATURE FOOTER -->
+    <footer class="mt-12 text-center">
+      <p dir="ltr" class="inline-block px-6 py-2.5 rounded-full bg-white/80 backdrop-blur-sm border border-amber-300 font-cuteEn text-sm sm:text-base font-bold text-deepPrincess shadow-sm">
+        Made with endless love by Menounaaa💗👑
+      </p>
+    </footer>
+  </main>
+
+  <!-- PHOTO LIGHTBOX MODAL FOR GALLERY -->
+  <div id="photo-lightbox" onclick="closeLightbox()" class="fixed inset-0 z-50 hidden bg-pink-950/75 backdrop-blur-sm items-center justify-center p-4">
+    <div onclick="event.stopPropagation()" class="bg-white rounded-3xl p-4 sm:p-6 max-w-md w-full border-4 border-amber-300 shadow-2xl text-center relative animate-[pageEnter_0.35s_ease]">
+      <button
+        onclick="closeLightbox()"
+        class="absolute -top-4 -right-4 w-10 h-10 rounded-full bg-deepPrincess text-white font-bold text-lg shadow-lg flex items-center justify-center cursor-pointer border-2 border-white"
+        aria-label="إغلاق"
+      >
+        ✕
+      </button>
+      <img id="lightbox-img" src="" alt="Princess Layan Memory" class="w-full max-h-[65vh] object-contain rounded-2xl bg-pink-50" />
+      <p id="lightbox-caption" class="mt-4 font-arabicTitle font-bold text-lg sm:text-xl text-deepPrincess"></p>
+    </div>
+  </div>
+
+  <script>
+    /* ==========================================================
+       1. STORYBOOK STATE & NAVIGATION
+       ========================================================== */
+    const TOTAL_CHAPTERS = 7;
+    let currentChapter = 0;
+
+    function goToChapter(index) {
+      if (index < 0 || index >= TOTAL_CHAPTERS) return;
+      playMagicChime(587.33); // Soft D5 Disney chime
+
+      document.querySelectorAll('.chapter-page').forEach((sec) => {
+        sec.classList.remove('active');
+      });
+
+      currentChapter = index;
+      const target = document.getElementById(`chapter-${currentChapter}`);
+      if (target) {
+        target.classList.add('active');
+      }
+
+      document.querySelectorAll('.progress-node').forEach((node) => {
+        const step = Number(node.getAttribute('data-step'));
+        if (step === currentChapter) {
+          node.classList.add('bg-deepPrincess', 'text-white', 'border-amber-400', 'scale-110', 'ring-4', 'ring-pink-200');
+          node.classList.remove('bg-white', 'text-pink-600');
+        } else if (step < currentChapter) {
+          node.classList.add('bg-pink-200', 'text-deepPrincess', 'border-pink-400');
+          node.classList.remove('bg-white', 'bg-deepPrincess', 'text-white', 'scale-110', 'ring-4', 'ring-pink-200');
+        } else {
+          node.classList.add('bg-white', 'text-pink-600');
+          node.classList.remove('bg-deepPrincess', 'bg-pink-200', 'text-white', 'border-amber-400', 'scale-110', 'ring-4', 'ring-pink-200');
+        }
+      });
+
+      const prevBtn = document.getElementById('prev-btn');
+      const nextBtn = document.getElementById('next-btn');
+      const counter = document.getElementById('chapter-counter');
+
+      prevBtn.disabled = currentChapter === 0;
+      counter.textContent = `${currentChapter + 1} / ${TOTAL_CHAPTERS}`;
+
+      if (currentChapter === TOTAL_CHAPTERS - 1) {
+        nextBtn.innerHTML = `<span>البداية</span><span>🏰</span>`;
+        nextBtn.onclick = () => goToChapter(0);
+      } else {
+        nextBtn.innerHTML = `<span>الفصل التالي</span><span>⬅️</span>`;
+        nextBtn.onclick = () => nextChapter();
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function nextChapter() {
+      if (currentChapter < TOTAL_CHAPTERS - 1) {
+        goToChapter(currentChapter + 1);
+      }
+    }
+
+    function prevChapter() {
+      if (currentChapter > 0) {
+        goToChapter(currentChapter - 1);
+      }
+    }
+
+    function enterMagicalWorld() {
+      launchRoyalFireworks();
+      goToChapter(1);
+    }
+
+    /* ==========================================================
+       2. INTERACTIVE MAGIC WAND SPARKLE TRAIL
+       ========================================================== */
+    let wandEnabled = true;
+    let lastSparkleTime = 0;
+
+    function toggleMagicWand() {
+      wandEnabled = !wandEnabled;
+      const label = document.getElementById('wand-label');
+      const btn = document.getElementById('wand-toggle-btn');
+      if (wandEnabled) {
+        label.textContent = 'Wand On';
+        btn.classList.remove('opacity-60');
+        playMagicChime(880);
+      } else {
+        label.textContent = 'Wand Off';
+        btn.classList.add('opacity-60');
+      }
+    }
+
+    function spawnWandSparkle(x, y, burst = false) {
+      if (!wandEnabled) return;
+      const symbols = ['✨', '💗', '⭐', '🦋', '🌟', '💖'];
+      const count = burst ? 7 : 1;
+
+      for (let i = 0; i < count; i++) {
+        const spark = document.createElement('span');
+        spark.className = 'wand-sparkle';
+        spark.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+        spark.style.left = `${x}px`;
+        spark.style.top = `${y}px`;
+        spark.style.fontSize = `${burst ? 16 + Math.random() * 10 : 14 + Math.random() * 8}px`;
+
+        const dx = (Math.random() - 0.5) * (burst ? 90 : 35);
+        const dy = (Math.random() - 0.5) * (burst ? 90 : 35) - 10;
+        spark.style.setProperty('--dx', `${dx}px`);
+        spark.style.setProperty('--dy', `${dy}px`);
+
+        document.body.appendChild(spark);
+        setTimeout(() => spark.remove(), 960);
+      }
+    }
+
+    document.addEventListener('pointermove', (e) => {
+      const now = Date.now();
+      if (now - lastSparkleTime > 55) {
+        lastSparkleTime = now;
+        spawnWandSparkle(e.clientX, e.clientY, false);
+      }
+    });
+
+    document.addEventListener('pointerdown', (e) => {
+      spawnWandSparkle(e.clientX, e.clientY, true);
+    });
+
+    /* ==========================================================
+       3. FLOATING FAIRYTALE PARTICLES (HEARTS, BUTTERFLIES, STARS)
+       ========================================================== */
+    function initFloatingDecorations() {
+      const container = document.getElementById('floating-layer');
+      const icons = ['💗', '🦋', '✨', '🌸', '💖', '⭐', '👑'];
+
+      for (let i = 0; i < 24; i++) {
+        const el = document.createElement('span');
+        el.className = 'float-item';
+        el.textContent = icons[i % icons.length];
+        el.style.left = `${Math.random() * 96}%`;
+        el.style.fontSize = `${14 + Math.random() * 14}px`;
+        el.style.animationDuration = `${11 + Math.random() * 12}s`;
+        el.style.animationDelay = `${Math.random() * 10}s`;
+        container.appendChild(el);
+      }
+
+      for (let j = 0; j < 16; j++) {
+        const star = document.createElement('span');
+        star.className = 'twinkle-star text-amber-400';
+        star.textContent = '✦';
+        star.style.top = `${5 + Math.random() * 55}%`;
+        star.style.left = `${4 + Math.random() * 92}%`;
+        star.style.fontSize = `${11 + Math.random() * 10}px`;
+        star.style.animationDelay = `${Math.random() * 3}s`;
+        container.appendChild(star);
+      }
+    }
+
+    /* ==========================================================
+       4. WEB AUDIO API – DISNEY MUSIC BOX & FAIRYTALE CHIMES
+       ========================================================== */
+    let audioCtx = null;
+    let isMusicPlaying = false;
+    let musicInterval = null;
+
+    function ensureAudioContext() {
+      if (!audioCtx) {
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AudioContextClass();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+    }
+
+    function playMagicChime(freq = 659.25) {
+      try {
+        ensureAudioContext();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(freq * 1.25, audioCtx.currentTime + 0.35);
+
+        gain.gain.setValueAtTime(0.075, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.55);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.56);
+      } catch (e) {
+        // Audio requires prior user gesture
+      }
+    }
+
+    function toggleMusic() {
+      const btnLabel = document.getElementById('music-label');
+      const btnIcon = document.getElementById('music-icon');
+
+      if (!isMusicPlaying) {
+        ensureAudioContext();
+        isMusicPlaying = true;
+        btnLabel.textContent = 'Music On';
+        btnIcon.textContent = '🎶';
+
+        // Gentle Disney-style Wishing Star Lullaby Arpeggio
+        const melody = [
+          523.25, 1046.5, 987.77, 783.99, 659.25, 783.99,
+          587.33, 880.0, 783.99, 698.46, 587.33, 659.25
+        ];
+        let noteIdx = 0;
+
+        const playNextNote = () => {
+          if (!isMusicPlaying) return;
+          const freq = melody[noteIdx % melody.length];
+          noteIdx++;
+
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+
+          gain.gain.setValueAtTime(0.001, audioCtx.currentTime);
+          gain.gain.linearRampToValueAtTime(0.05, audioCtx.currentTime + 0.08);
+          gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 1.15);
+
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start();
+          osc.stop(audioCtx.currentTime + 1.2);
+        };
+
+        playNextNote();
+        musicInterval = setInterval(playNextNote, 660);
+      } else {
+        isMusicPlaying = false;
+        clearInterval(musicInterval);
+        btnLabel.textContent = 'Music Off';
+        btnIcon.textContent = '🎵';
+      }
+    }
+
+    /* ==========================================================
+       5. CONFETTI & ROYAL FIREWORKS CELEBRATIONS
+       ========================================================== */
+    function triggerConfettiCelebration() {
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 75,
+          spread: 72,
+          origin: { y: 0.65 },
+          colors: ['#ff6ea9', '#ffc2df', '#d4af37', '#f6d365', '#c084fc', '#ffffff'],
+        });
+      }
+    }
+
+    function launchRoyalFireworks() {
+      playMagicChime(1046.5);
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 65,
+          angle: 60,
+          spread: 60,
+          origin: { x: 0.1, y: 0.65 },
+          colors: ['#ff6ea9', '#f6d365', '#d4af37', '#ffffff'],
+        });
+        confetti({
+          particleCount: 65,
+          angle: 120,
+          spread: 60,
+          origin: { x: 0.9, y: 0.65 },
+          colors: ['#ff6ea9', '#f6d365', '#c084fc', '#ffffff'],
+        });
+      }
+    }
+
+    /* ==========================================================
+       6. CHAPTER FOUR – INTERACTIVE ENVELOPE & LETTER
+       ========================================================== */
+    let letterOpened = false;
+
+    function openRoyalLetter() {
+      const wrapper = document.getElementById('envelope-container');
+      const letterBox = document.getElementById('letter-content-box');
+      const hint = document.getElementById('envelope-hint');
+
+      wrapper.classList.add('opened');
+      playMagicChime(783.99);
+
+      if (!letterOpened) {
+        letterOpened = true;
+        launchRoyalFireworks();
+        hint.textContent = '💌 رسالة حب من عمتك مريم إليكِ يا ليان 💌';
+
+        setTimeout(() => {
+          letterBox.classList.remove('hidden');
+          const paragraphs = document.querySelectorAll('.letter-paragraph');
+          paragraphs.forEach((p, idx) => {
+            setTimeout(() => {
+              p.classList.add('visible');
+            }, idx * 240);
+          });
+        }, 420);
+      }
+    }
+
+    /* ==========================================================
+       7. CHAPTER FIVE – 7 INTERACTIVE DISNEY ACTIVITIES
+       ========================================================== */
+    // Activity 1: Magic Mirror
+    function activateMagicMirror() {
+      playMagicChime(987.77);
+      triggerConfettiCelebration();
+      document.getElementById('mirror-btn').classList.add('hidden');
+      const reveal = document.getElementById('mirror-reveal');
+      reveal.classList.remove('hidden');
+      reveal.classList.add('flex');
+    }
+
+    // Activity 2: Magic Box
+    function openMagicBox() {
+      playMagicChime(880);
+      triggerConfettiCelebration();
+      document.getElementById('magic-box-btn').classList.add('hidden');
+      const reveal = document.getElementById('magic-box-reveal');
+      reveal.classList.remove('hidden');
+      reveal.classList.add('flex');
+    }
+
+    // Activity 3: Lucky Star
+    const starPhrases = [
+      'أنتِ أميرتنا الجميلة. 👑✨',
+      'ابتسامتك تجعل العالم أجمل. 🌸😊',
+      'أنتِ ذكية وشاطرة. 🌟👏',
+      'نحن فخورون بكِ. 💖🦋',
+      'نحبك كثيراً يا ليان. 💗🎀',
+    ];
+
+    function revealStar(index, btn) {
+      playMagicChime(659.25 + index * 65);
+      const textEl = document.getElementById('star-message-text');
+      textEl.textContent = starPhrases[index];
+      btn.classList.add('bg-pink-200', 'border-pink-400', 'scale-110');
+      triggerConfettiCelebration();
+    }
+
+    // Activity 4: Pink Heart
+    function openPinkHeart() {
+      playMagicChime(783.99);
+      triggerConfettiCelebration();
+      document.getElementById('pink-heart-btn').classList.add('hidden');
+      const reveal = document.getElementById('pink-heart-reveal');
+      reveal.classList.remove('hidden');
+      reveal.classList.add('flex');
+    }
+
+    // Activity 5: Catch the Magic Butterflies
+    let butterflyScore = 0;
+
+    function initButterflyGarden() {
+      const garden = document.getElementById('butterfly-garden');
+      garden.innerHTML = '';
+
+      for (let i = 0; i < 4; i++) {
+        spawnSingleButterfly(garden, i);
+      }
+    }
+
+    function spawnSingleButterfly(garden, slotIndex) {
+      const btn = document.createElement('button');
+      btn.className =
+        'absolute text-4xl sm:text-5xl cursor-pointer transition-all duration-1000 ease-in-out hover:scale-125 select-none focus:outline-none';
+      btn.textContent = slotIndex % 2 === 0 ? '🦋' : '🧚‍♀️';
+      btn.style.left = `${15 + Math.random() * 65}%`;
+      btn.style.top = `${15 + Math.random() * 60}%`;
+
+      const moveTimer = setInterval(() => {
+        if (!btn.isConnected) {
+          clearInterval(moveTimer);
+          return;
+        }
+        btn.style.left = `${10 + Math.random() * 72}%`;
+        btn.style.top = `${12 + Math.random() * 65}%`;
+        btn.style.transform = `rotate(${(Math.random() - 0.5) * 30}deg)`;
+      }, 1500 + slotIndex * 250);
+
+      btn.onclick = () => {
+        clearInterval(moveTimer);
+        butterflyScore++;
+        document.getElementById('butterfly-score').textContent = butterflyScore;
+        document.getElementById('butterfly-msg').textContent = 'Keep Smiling, Little Princess! 🦋💗✨';
+        playMagicChime(987.77);
+
+        btn.textContent = '💖';
+        btn.style.transform = 'scale(1.5)';
+        setTimeout(() => {
+          btn.remove();
+          spawnSingleButterfly(garden, slotIndex);
+        }, 450);
+      };
+
+      garden.appendChild(btn);
+    }
+
+    // Activity 6: Pop the Pink Balloons
+    const balloonMessages = [
+      'أنتِ أميرة رائعة! 👑',
+      'نحب ضحكتك الحلوة! 😊💗',
+      'برافو يا شاطرة! 🌟',
+      'أنتِ نجمة متلألئة! ✨',
+      'عمتك تحبك كثيراً! 🎀',
+      'أحلام سعيدة يا ليان! 🦋',
+    ];
+
+    function initBalloonGame() {
+      const grid = document.getElementById('balloon-grid');
+      const msg = document.getElementById('balloon-msg');
+      msg.textContent = 'اضغطي على أي بالون يا أميرة! 🎈✨';
+      grid.innerHTML = '';
+
+      const balloonIcons = ['🎈', '🩷', '🎈', '💛', '🎈', '💜'];
+      for (let i = 0; i < 6; i++) {
+        const b = document.createElement('button');
+        b.className =
+          'balloon-bob w-14 h-14 rounded-full bg-gradient-to-b from-pink-100 to-pink-200 border-2 border-pink-300 shadow-sm text-3xl flex items-center justify-center cursor-pointer hover:scale-110 transition-transform';
+        b.style.animationDelay = `${i * 0.25}s`;
+        b.textContent = balloonIcons[i];
+        b.onclick = () => popBalloon(b, i);
+        grid.appendChild(b);
+      }
+    }
+
+    function popBalloon(btn, idx) {
+      if (btn.dataset.popped === '1') return;
+      btn.dataset.popped = '1';
+      playMagicChime(880 + idx * 45);
+      btn.classList.remove('balloon-bob');
+      btn.textContent = '✨';
+      btn.classList.add('bg-amber-100', 'border-amber-300', 'scale-110');
+      document.getElementById('balloon-msg').textContent = balloonMessages[idx];
+    }
+
+    // Activity 7: Find the Crown
+    let crownIndex = 0;
+    let crownFound = false;
+
+    function initCrownGame() {
+      const grid = document.getElementById('crown-grid');
+      const status = document.getElementById('crown-status');
+      const coverIcons = ['🌹', '☁️', '⭐', '🌸', '☁️', '✨'];
+      crownIndex = Math.floor(Math.random() * 6);
+      crownFound = false;
+      status.textContent = 'Where is the golden crown? 🔍✨';
+      grid.innerHTML = '';
+
+      for (let i = 0; i < 6; i++) {
+        const tile = document.createElement('button');
+        tile.className =
+          'h-20 rounded-2xl bg-white hover:bg-pink-100 border-2 border-pink-300 shadow-sm text-3xl flex items-center justify-center transition-all hover:scale-105 cursor-pointer';
+        tile.textContent = coverIcons[i];
+        tile.onclick = () => checkCrownTile(i, tile);
+        grid.appendChild(tile);
+      }
+    }
+
+    function checkCrownTile(index, tile) {
+      if (crownFound) return;
+      const status = document.getElementById('crown-status');
+
+      if (index === crownIndex) {
+        crownFound = true;
+        tile.textContent = '👑';
+        tile.classList.remove('bg-white', 'border-pink-300');
+        tile.classList.add('bg-amber-200', 'border-amber-500', 'scale-110', 'shadow-lg');
+        status.textContent = 'Bravo Layan! You are a real princess! 👑🎉';
+        playMagicChime(1046.5);
+        launchRoyalFireworks();
+      } else {
+        playMagicChime(440);
+        tile.textContent = '🌷';
+        tile.classList.add('bg-pink-100', 'opacity-75');
+        status.textContent = 'Not here, keep looking little princess! ✨';
+      }
+    }
+
+    /* ==========================================================
+       8. POLAROID GALLERY LIGHTBOX
+       ========================================================== */
+    function openLightbox(src, caption) {
+      playMagicChime(659.25);
+      const modal = document.getElementById('photo-lightbox');
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox-caption').textContent = caption;
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeLightbox() {
+      const modal = document.getElementById('photo-lightbox');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    /* ==========================================================
+       INITIALIZE ON LOAD
+       ========================================================== */
+    window.addEventListener('DOMContentLoaded', () => {
+      initFloatingDecorations();
+      initButterflyGarden();
+      initBalloonGame();
+      initCrownGame();
+      goToChapter(0);
+    });
+  </script>
+</body>
+</html>
